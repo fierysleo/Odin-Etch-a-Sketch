@@ -66,19 +66,25 @@
     buttonGridCount.addEventListener('click', () => {        
         const newGridCount = prompt('Enter new grid count (max = 100):');
         if (newGridCount && !isNaN(newGridCount)) {
-            gridCount = parseInt(newGridCount);
-            mainContainer.innerHTML = ''; // Clear existing content
-            mainContainer.append(buttonGridCount); // Re-add the button
-            for (let i = 0; i < gridCount; i++) {
-                const container = divcontainer();
-                container.style.display = 'flex';
-                container.style.flexDirection = 'row';
-                container.style.flexWrap = 'wrap';
-                mainContainer.append(container);
-                for (let j = 0; j < gridCount; j++) {
-                    const box = divBox();
-                    container.append(box);
-                }
+            if(newGridCount <= 100){
+                gridCount = parseInt(newGridCount);
+                mainContainer.innerHTML = ''; 
+                mainContainer.append(containerControls); 
+                containerControls.append(buttonGridCount,buttonGridClearBoxes);
+                
+                for (let i = 0; i < gridCount; i++) {
+                    const container = divcontainer();
+                    container.style.display = 'flex';
+                    container.style.flexDirection = 'row';
+                    container.style.flexWrap = 'wrap';
+                    mainContainer.append(container);
+                    for (let j = 0; j < gridCount; j++) {
+                        const box = divBox();
+                        container.append(box);
+                    }
+            }}
+            else{
+                alert('Please enter a number less than or equal to 100.');
             }
         } else {
             alert('Please enter a valid number.');
